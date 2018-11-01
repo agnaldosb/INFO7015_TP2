@@ -67,15 +67,15 @@ void Controller::ack_received( const uint64_t sequence_number_acked,
     // Estimate Datagram trip time to make changes in the_window_size
     double est_DATAtt = (DATAtt - DATAtt_min) + est_DATAtt_min;
 	
-	if (est_DATAtt > 1.6 * est_DATAtt_min)
+	if (est_DATAtt > 1.5 * est_DATAtt_min)
         the_window_size -= 0.3;
     else
         the_window_size += 0.5;
 
     if (the_window_size < 1) 
-        the_window_size = 1; // Minimum window size will be 2
+        the_window_size = 1; // Minimum window size will be 1
     else if (the_window_size > 73){
-        the_window_size = 73; // Restrict window size in 70
+        the_window_size = 73; // Restrict window size in 73
 	}
   if ( debug_ ) {
     cerr << "At time " << timestamp_ack_received
